@@ -9,7 +9,7 @@ Span::Span() : _max(0)
 	return ;
 }
 
-Span::Span( unsigned int N) : _max(N)
+Span::Span( unsigned int N ) : _max(N)
 {
 	return ;
 }
@@ -49,17 +49,20 @@ Span &				Span::operator=( Span const & rhs )
 void				Span::addNumber(int nb)
 {
 	if (this->vec.size() >= this->_max)
-		throw "Maximum size reach";
+		throw Span::MaximumSizeException();
 	this->vec.push_back(nb);
 }
 
-void			addNumber(std::vector<int>::iterator start, std::vector<int>::iterator end)
+void				Span::addNumber(std::vector<int>::iterator start, std::vector<int>::iterator end)
 {
 	(void)start; (void)end;
+	if (std::distance(start, end) > this->_max)
+		throw Span::NotEnougthSpaceException();
+	this->vec.insert(this->vec.begin(), start, end);
 }
 
 
-unsigned int		Span::shortestSpan()
+unsigned int		Span::shortestSpan() const
 {
 	if (this->vec.size() == 0 || this->vec.size() == 1)
 		throw "Can't process shortestSpan()";
@@ -82,7 +85,7 @@ unsigned int		Span::shortestSpan()
 	return shortest;
 }
 
-unsigned int		Span::longestSpan()
+unsigned int		Span::longestSpan() const
 {
 	if (this->vec.size() == 0 || this->vec.size() == 1)
 		throw "Can't process longestSpan()";
@@ -94,6 +97,8 @@ unsigned int		Span::longestSpan()
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
-
+unsigned int		Span::getMax() const {
+	return this->_max;
+}
 
 /* ************************************************************************** */
