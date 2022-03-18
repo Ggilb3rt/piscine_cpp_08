@@ -43,7 +43,13 @@ int main() {
 	makeTests<MutantStack>(mstack);
 	std::stack<int> s(mstack);
 
-
+	std::cout << "---------Mutant stack cpy-------" << std::endl;
+	mstack.push(42);
+	MutantStack<int> lol(mstack);
+	lol.push(23487);
+	makeTests<MutantStack>(lol);
+	std::cout << "deep cpy ?" << std::endl;
+	makeTests<MutantStack>(mstack);
 	std::cout << "---------List-------" << std::endl;
 	std::list<int>	liste;
 
