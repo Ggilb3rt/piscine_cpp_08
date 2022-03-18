@@ -1,0 +1,67 @@
+#include <iostream>
+#include <algorithm>
+#include <list>
+#include "MutantStack.hpp"
+
+template< template <typename> class V>
+void	makeTests(V<int> leStack)
+{
+	leStack.push(5);
+	leStack.push(17);
+
+	std::cout << leStack.top() << std::endl;
+
+	leStack.pop();
+
+	std::cout << leStack.size() << std::endl;
+
+	leStack.push(3);
+	leStack.push(5);
+	leStack.push(737);
+	leStack.push(0);
+    
+	MutantStack<int>::iterator it = leStack.begin();
+    MutantStack<int>::iterator ite = leStack.end();
+
+	++it;
+	--it;
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		++it;
+	}
+}
+
+void	printLol(int i) {
+	std::cout << i << std::endl;
+}
+
+int main() {
+	std::cout << "---------Mutant stack-------" << std::endl;
+	MutantStack<int> mstack;
+
+	makeTests<MutantStack>(mstack);
+	std::stack<int> s(mstack);
+
+
+	std::cout << "---------List-------" << std::endl;
+	std::list<int>	liste;
+
+	liste.push_front(5);	
+	liste.push_front(17);
+
+	std::cout << liste.front() << std::endl;
+
+	liste.pop_front();
+
+	std::cout << liste.size() << std::endl;
+
+	liste.push_back(3);
+	liste.push_back(5);
+	liste.push_back(737);
+	liste.push_back(0);
+
+	for_each(liste.begin(), liste.end(), printLol);
+
+	return 0;
+}
