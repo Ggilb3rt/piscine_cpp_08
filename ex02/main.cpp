@@ -42,6 +42,7 @@ int main() {
 
 	makeTests<MutantStack>(mstack);
 	std::stack<int> s(mstack);
+	//std::cout << s.top() << std::endl;
 
 	std::cout << "---------Mutant stack cpy-------" << std::endl;
 	mstack.push(42);
