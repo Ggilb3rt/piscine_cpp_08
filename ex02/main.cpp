@@ -39,10 +39,15 @@ void	printLol(int i) {
 int main() {
 	std::cout << "---------Mutant stack-------" << std::endl;
 	MutantStack<int> mstack;
-
 	makeTests<MutantStack>(mstack);
+
+	std::cout << "---------Real Stack-------" << std::endl;
 	std::stack<int> s(mstack);
-	//std::cout << s.top() << std::endl;
+	while (!s.empty())
+	{
+		std::cout << s.top() << std::endl;
+		s.pop();
+	}
 
 	std::cout << "---------Mutant stack cpy-------" << std::endl;
 	mstack.push(42);
@@ -51,6 +56,7 @@ int main() {
 	makeTests<MutantStack>(lol);
 	std::cout << "deep cpy ?" << std::endl;
 	makeTests<MutantStack>(mstack);
+
 	std::cout << "---------List-------" << std::endl;
 	std::list<int>	liste;
 
