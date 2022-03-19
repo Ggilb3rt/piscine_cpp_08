@@ -4,24 +4,24 @@
 #include "MutantStack.hpp"
 
 template< template <typename> class V>
-void	makeTests(V<int> leStack)
+void	makeTests(V<int> * leStack)
 {
-	leStack.push(5);
-	leStack.push(17);
+	leStack->push(5);
+	leStack->push(17);
 
-	std::cout << leStack.top() << std::endl;
+	std::cout << leStack->top() << std::endl;
 
-	leStack.pop();
+	leStack->pop();
 
-	std::cout << leStack.size() << std::endl;
+	std::cout << leStack->size() << std::endl;
 
-	leStack.push(3);
-	leStack.push(5);
-	leStack.push(737);
-	leStack.push(0);
+	leStack->push(3);
+	leStack->push(5);
+	leStack->push(737);
+	leStack->push(0);
     
-	MutantStack<int>::iterator it = leStack.begin();
-    MutantStack<int>::iterator ite = leStack.end();
+	MutantStack<int>::iterator it = leStack->begin();
+    MutantStack<int>::iterator ite = leStack->end();
 
 	++it;
 	--it;
@@ -39,23 +39,7 @@ void	printLol(int i) {
 int main() {
 	std::cout << "---------Mutant stack-------" << std::endl;
 	MutantStack<int> mstack;
-	makeTests<MutantStack>(mstack);
-
-	std::cout << "---------Real Stack-------" << std::endl;
-	std::stack<int> s(mstack);
-	while (!s.empty())
-	{
-		std::cout << s.top() << std::endl;
-		s.pop();
-	}
-
-	std::cout << "---------Mutant stack cpy-------" << std::endl;
-	mstack.push(42);
-	MutantStack<int> lol(mstack);
-	lol.push(23487);
-	makeTests<MutantStack>(lol);
-	std::cout << "deep cpy ?" << std::endl;
-	makeTests<MutantStack>(mstack);
+	makeTests<MutantStack>(&mstack);
 
 	std::cout << "---------List-------" << std::endl;
 	std::list<int>	liste;
@@ -75,6 +59,22 @@ int main() {
 	liste.push_back(0);
 
 	for_each(liste.begin(), liste.end(), printLol);
+
+	std::cout << "---------Real Stack-------" << std::endl;
+	std::stack<int> s(mstack);
+	while (!s.empty())
+	{
+		std::cout << s.top() << std::endl;
+		s.pop();
+	}
+
+	std::cout << "---------Mutant stack cpy-------" << std::endl;
+	mstack.push(42);
+	MutantStack<int> lol(mstack);
+	lol.push(23487);
+	makeTests<MutantStack>(&lol);
+	std::cout << "deep cpy ? (print base mstack)" << std::endl;
+	makeTests<MutantStack>(&mstack);
 
 	return 0;
 }
